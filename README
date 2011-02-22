@@ -1,0 +1,27 @@
+广告邮件助手 Mail Adv Tool v0.9
+
+Author: toby <cntoby@gmail.com>
+
+说明：
+
+本程序使用标准C编写，目前在FreeBSD和Linux（包括Gentoo/Debian/CentOS）进行
+编译测试，完全兼容，在Windows下使用可能需要做一些修改，比如发送邮件时使用
+sendmail.exe。
+
+文件包内的Makefile只支持对较新版本的make兼容。
+
+功能说明：
+
+mailadv [-r] [-h] [-f <发件邮箱>] [-t <接收地址>] [-m <邮件列表>] [-b <邮件文件>] [-s <邮件标题>] [-l <日志文件>]
+
+    -f    --from      发件邮箱. 默认: A.D.S <ads@ads.snowpear.com>
+    -t    --to        收件邮箱，本设置可以和-m同时使用，但是本设置中的邮件发送情况不记入日志文件.
+    -m    --maillist  邮件列表文件，每行一个邮件地址. 默认: 当前目录下的maillist
+    -b    --content   邮件内容文件，需要HTML格式的文件. 默认: 当年目录下的mail.htm
+    -s    --subject   邮件标题，此项是必须的.
+    -l    --log       日志文件, . 默认: 当年目录下的maillog
+    -r    --continue  继续执行上一次未发送完的邮件列表, 此功能以发送日志为判断依据.
+    -h    --help      显示帮助信息.
+
+
+
