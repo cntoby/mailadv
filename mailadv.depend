@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1297236265 source:/home/toby/src/toby/mailadv/base64/base64.c
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+	"base64.h"
+
+1297231261 /home/toby/src/toby/mailadv/base64/base64.h
+
+1297238045 source:/home/toby/src/toby/mailadv/main.c
+	"base64/base64.h"
+	"getopt/getopt.h"
+
+1297741740 /home/toby/src/toby/mailadv/getopt/getopt.h
+	<stdio.h>
+	<stdlib.h>
+

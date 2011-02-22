@@ -1,0 +1,14 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+_BASE64_H	base64.h	5;"	d
+_clear_v	base64.c	/^void _clear_v (const char *s, char *t)$/;"	f
+base64_decode	base64.c	/^int base64_decode(char *s, char *t, long int count)$/;"	f
+base64_encode	base64.c	/^int base64_encode(char *s, char *t, long int count)$/;"	f
+base64_len	base64.c	/^long int base64_len(char *s, int type)$/;"	f
+idxArr	base64.c	/^char idxArr[] = {-1, -1, -1, -1, -1, -1, -1, -1, -1, -1,$/;"	v
+keyStr	base64.c	/^char keyStr[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',$/;"	v
+main	main.c	/^int main(int argc, char *argv[])$/;"	f
