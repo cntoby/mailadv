@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_layout_file>
-	<ActiveTarget name="Release" />
+	<ActiveTarget name="Debug" />
 	<File name="base64/base64.c" open="1" top="0" tabpos="5">
 		<Cursor position="3340" topLine="88" />
 	</File>
 	<File name="base64/base64.h" open="1" top="0" tabpos="4">
-		<Cursor position="422" topLine="0" />
+		<Cursor position="162" topLine="0" />
 	</File>
 	<File name="getopt/getopt.c" open="1" top="0" tabpos="2">
 		<Cursor position="1720" topLine="43" />
 	</File>
 	<File name="getopt/getopt.h" open="1" top="0" tabpos="3">
-		<Cursor position="77" topLine="12" />
+		<Cursor position="77" topLine="15" />
 	</File>
 	<File name="main.c" open="1" top="1" tabpos="1">
-		<Cursor position="165" topLine="0" />
+		<Cursor position="6681" topLine="0" />
 	</File>
 	<File name="main.h" open="1" top="0" tabpos="6">
-		<Cursor position="34" topLine="0" />
+		<Cursor position="55" topLine="0" />
+	</File>
+	<File name="sendmail/sendmail.c" open="1" top="0" tabpos="7">
+		<Cursor position="1207" topLine="18" />
+	</File>
+	<File name="sendmail/sendmail.h" open="1" top="0" tabpos="8">
+		<Cursor position="382" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>
