@@ -180,10 +180,12 @@ char * subencode(const char *src, char *dest, unsigned int len)
     unsigned slen = 0;
     unsigned short i = 0;
     if (getenv("LANG")) strcpy(encode, getenv("LANG"));
-    if (strlen(encode)<1) strcpy(encode, "GBK"); /* if environment LANG is not set or is empty, set default encode to GBK */
-    while (encode[i] && (encode[i] != '.'))
+    else strcpy(encode, "GBK"); /* if environment LANG is not set or is empty, set default encode to GBK */
+    if (strchr(encode, '.')) {
+        while (encode[i] && (encode[i] != '.'))
+            ++i;
         ++i;
-    ++i;
+    }
     slen = base64_len((char *)src, 0);
     b = (char *)malloc(slen);
     base64_encode(src, b, len);
