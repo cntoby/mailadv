@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
 {
     char from[50], to[50], maillist[30], content[30], subject[80], log[30];
     char *mcontent=(char *)NULL, *mb=(char *)NULL;
-    short int cont = 0, hasto = 0, sret = 0;
+    short int cont = 0, hasto = 0, sret = 0, tolen = 0;
     unsigned int curline = 0, flen = 0, mllen = 0;
     FILE *fp, *lfp;
     char hdrs[] = "From: %s\r\nReply-To: %s\r\nX-Mailer: tobycn.org mailler 0.9\r\nMIME-Version: 1.0\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Transfer-Encoding: base64\r\n";
@@ -108,7 +108,7 @@ int main(int argc, char *argv[])
     if (cont) {
         lfp = fopen(log, "a+");
         curline = fileline(log);
-        seekline(lfp, curline);
+        seekline(fp, curline);
     }else {
         lfp = fopen(log, "w+");
     }
@@ -125,13 +125,19 @@ int main(int argc, char *argv[])
         printf("Current MISSION will send %d mails.\n", mllen);
         if (curline > 0) printf("continue from %d\n", curline);
         while(fgets(to, 50, fp)) {
+            ++curline;
             printf("Current: %d / %d\r", curline, mllen);
+            tolen = strlen(to);
+            tolen = tolen > 0 ? tolen-1 : tolen;
+            if (to[tolen]=='\n') to[tolen] = '\0';
             if ( (sret = sendmail(to, subject, mcontent, T_HEADER|T_HTML, hdr))==T_EMOK)
                 fprintf(lfp, "%s\t1\n", to);
             else
                 fprintf(lfp, "%s\t%d\n", to, sret);
         }
         printf("\nMission Complete\n");
+    }else if(mllen <= curline) {
+        printf("The mail addresses all sended or maillist file is invalid.\n");
     }
     if (fp) fclose(fp);
     if (lfp) fclose(lfp);
