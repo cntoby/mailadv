@@ -129,11 +129,13 @@ int main(int argc, char *argv[])
             printf("Current: %d / %d\r", curline, mllen);
             tolen = strlen(to);
             tolen = tolen > 0 ? tolen-1 : tolen;
+            if(tolen<1) continue;    // if the line is empty
             if (to[tolen]=='\n') to[tolen] = '\0';
             if ( (sret = sendmail(to, subject, mcontent, T_HEADER|T_HTML, hdr))==T_EMOK)
                 fprintf(lfp, "%s\t1\n", to);
             else
                 fprintf(lfp, "%s\t%d\n", to, sret);
+            fflush(stdout);
         }
         printf("\nMission Complete\n");
     }else if(mllen <= curline) {
