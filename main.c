@@ -138,7 +138,7 @@ int main(int argc, char *argv[])
             fflush(stdout);
         }
         printf("\nMission Complete\n");
-    }else if(mllen <= curline) {
+    }else if(mllen && mllen <= curline) {
         printf("The mail addresses all sended or maillist file is invalid.\n");
     }
     if (fp) fclose(fp);
