@@ -8,10 +8,11 @@ void usage(int type);
 
 int main(int argc, char *argv[])
 {
-    char from[50], to[50], maillist[30], content[30], subject[80], log[30];
+    char from[50], to[50], maillist[30], content[30], subject[150], log[30];
     char *mcontent=(char *)NULL, *mb=(char *)NULL;
     short int cont = 0, hasto = 0, sret = 0, tolen = 0;
     unsigned int curline = 0, flen = 0, mllen = 0;
+    int pause = 10, number = 0, itmp = 0;
     FILE *fp, *lfp;
     char hdrs[] = "From: %s\r\nReply-To: %s\r\nX-Mailer: tobycn.org mailler 0.9\r\nMIME-Version: 1.0\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Transfer-Encoding: base64\r\n";
     char hdr[256];
@@ -22,6 +23,8 @@ int main(int argc, char *argv[])
                     {'s', "subject",  "", TOPT_HAS_VAL},
                     {'l', "log",       "maillog", TOPT_HAS_VAL},
                     {'t', "to",        "", TOPT_HAS_VAL},
+                    {'p', "pause",     "10", TOPT_HAS_VAL},
+                    {'n', "number",    "0", TOPT_HAS_VAL},
                     {'r', "continue", "", TOPT_NO_VAL},
                     {'h', "help",      "", TOPT_NO_VAL},
                     {0, "", "",0}
@@ -38,14 +41,19 @@ int main(int argc, char *argv[])
         return -1;
     }
 
+    /* Get arguments use getopt */
     tmp = get_opt("from");
-    strcpy(from, tmp->value);
+    strncpy(from, tmp->value, 50);
     tmp = get_opt("maillist");
-    strcpy(maillist, tmp->value);
+    strncpy(maillist, tmp->value, 30);
     tmp = get_opt("content");
-    strcpy(content, tmp->value);
+    strncpy(content, tmp->value, 30);
     tmp = get_opt("log");
-    strcpy(log, tmp->value);
+    strncpy(log, tmp->value, 30);
+    tmp = get_opt("pause");
+    if ((itmp = atoi(tmp->value)) > 0) pause = itmp;
+    tmp = get_opt("number");
+    if ((itmp = atoi(tmp->value)) > 0) number = itmp;
     /* encode the subject */
     tmp = get_opt("subject");
     if (TOPT_ISSET(tmp)) {
@@ -57,7 +65,7 @@ int main(int argc, char *argv[])
     }
     tmp = get_opt("to");
     if (TOPT_ISSET(tmp)) {
-        strcpy(to, tmp->value);
+        strncpy(to, tmp->value, 50);
         hasto = 1;
     }
     tmp = get_opt("continue");
@@ -136,6 +144,8 @@ int main(int argc, char *argv[])
             else
                 fprintf(lfp, "%s\t%d\n", to, sret);
             fflush(stdout);
+            if (number > 0 && pause > 0 && curline != 0 && (curline%number!=0))
+                sleep(pause);
         }
         printf("\nMission Complete\n");
     }else if(mllen && mllen <= curline) {
@@ -144,24 +154,7 @@ int main(int argc, char *argv[])
     if (fp) fclose(fp);
     if (lfp) fclose(lfp);
     free(mcontent);
-    /*
-    tmp = get_opt("0");
-    if(tmp) {
-        printf("The First name: %s\n", tmp->value);
-        if(strlen(tmp->value)>0) {
-            len = base64_len(tmp->value, 0);
-            t = (char *)malloc(len);
-            rlen = base64_encode(tmp->value, t, len);
-            printf("Base64 is: %d (%d)\n%s\n", rlen, len, t);
-            len = chunk_split_len(t);
-            sp = (char *)malloc(len);
-            sp = chunk_split(t, sp);
-            printf("Base64 chunked: %d\n%s\n", len, sp);
-            free(t);
-            //free(sp);
-        }
-    }
-    */
+
     return 0;
 }
 
@@ -177,6 +170,8 @@ void usage(int type) {
         printf("  %-6s%-12s%s%s\n", "-b", "--content", "mail body. Default: ", "mail.htm");
         printf("  %-6s%-12s%s\n", "-s", "--subject", "subject of the mail.");
         printf("  %-6s%-12s%s%s\n", "-l", "--log", "log file, if you want continue the process, this will needed. Default: ", "maillog");
+        printf("  %-6s%-12s%s%s\n", "-p", "--pause", "Pause seconds. Default: ", "10");
+        printf("  %-6s%-12s%s%s\n", "-n", "--number", "Pause every [number] seconds. Default: ", "0");
         printf("  %-6s%-12s%s\n", "-r", "--continue", "continue the last process, need -l.");
         printf("  %-6s%-12s%s\n\n", "-h", "--help", "Show this message.");
     }
