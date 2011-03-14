@@ -144,7 +144,7 @@ int main(int argc, char *argv[])
             else
                 fprintf(lfp, "%s\t%d\n", to, sret);
             fflush(stdout);
-            if (number > 0 && pause > 0 && curline != 0 && (curline%number!=0))
+            if (number > 0 && pause > 0 && curline != 0 && curline < mllen && (curline%number==0))
                 sleep(pause);
         }
         printf("\nMission Complete\n");
