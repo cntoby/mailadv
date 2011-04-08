@@ -177,6 +177,10 @@ void usage(int type) {
     }
 }
 
+/**
+ * find locale charset and encode the subject use it.
+ * default charset: gbk.
+ */
 char * subencode(const char *src, char *dest, unsigned int len)
 {
     char encode[20] = "", *b;

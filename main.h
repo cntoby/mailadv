@@ -4,6 +4,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
 #include "base64/base64.h"
 #include "getopt/getopt.h"
 #include "sendmail/sendmail.h"
