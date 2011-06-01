@@ -17,17 +17,17 @@ int main(int argc, char *argv[])
     char hdrs[] = "From: %s\r\nReply-To: %s\r\nX-Mailer: tobycn.org mailler 0.9\r\nMIME-Version: 1.0\r\nContent-Type: text/html; charset=UTF-8\r\nContent-Transfer-Encoding: base64\r\n";
     char hdr[256];
     t_option arglist[] = {
-                    {'f', "from",     "A.D.S <ads@ads.snowpear.com>", TOPT_HAS_VAL},
-                    {'m', "maillist", "maillist",  TOPT_HAS_VAL},
-                    {'b', "content",  "mail.htm", TOPT_HAS_VAL},
-                    {'s', "subject",  "", TOPT_HAS_VAL},
-                    {'l', "log",       "maillog", TOPT_HAS_VAL},
-                    {'t', "to",        "", TOPT_HAS_VAL},
-                    {'p', "pause",     "10", TOPT_HAS_VAL},
-                    {'n', "number",    "0", TOPT_HAS_VAL},
-                    {'r', "continue", "", TOPT_NO_VAL},
-                    {'h', "help",      "", TOPT_NO_VAL},
-                    {0, "", "",0}
+        {'f', "from",     "A.D.S <ads@ads.snowpear.com>", TOPT_HAS_VAL},
+        {'m', "maillist", "maillist",  TOPT_HAS_VAL},
+        {'b', "content",  "mail.htm", TOPT_HAS_VAL},
+        {'s', "subject",  "", TOPT_HAS_VAL},
+        {'l', "log",       "maillog", TOPT_HAS_VAL},
+        {'t', "to",        "", TOPT_HAS_VAL},
+        {'p', "pause",     "10", TOPT_HAS_VAL},
+        {'n', "number",    "0", TOPT_HAS_VAL},
+        {'r', "continue", "", TOPT_NO_VAL},
+        {'h', "help",      "", TOPT_NO_VAL},
+        {0, "", "",0}
     };
     t_option *tmp = (t_option *)NULL;
 
@@ -36,7 +36,7 @@ int main(int argc, char *argv[])
     if( argc <= 1 ) {
         usage(0);
         return -1;
-    }else if (TOPT_ISSET(tmp)) {
+    } else if (TOPT_ISSET(tmp)) {
         usage(1);
         return -1;
     }
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
     if (TOPT_ISSET(tmp)) {
         //strcpy(subject, tmp->value);
         subencode(tmp->value, subject, 80);
-    }else {
+    } else {
         printf("subject is needed.\n");
         exit(-1);
     }
@@ -86,7 +86,7 @@ int main(int argc, char *argv[])
         printf("%s can not read..\n", content);
         fclose(fp);
         exit(-1);
-    }else {
+    } else {
         /* read mail content, and encode it. */
         flen = base64_len(mcontent, 0);
         mb = (char *)malloc(flen+1);
@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
     }
     if (mllen) {
         fp = fopen(maillist, "r");
-    }else {
+    } else {
         fp = (FILE *)NULL;
     }
     /* check mail log file */
@@ -117,7 +117,7 @@ int main(int argc, char *argv[])
         lfp = fopen(log, "a+");
         curline = fileline(log);
         seekline(fp, curline);
-    }else {
+    } else {
         lfp = fopen(log, "w+");
     }
 
@@ -148,7 +148,7 @@ int main(int argc, char *argv[])
                 sleep(pause);
         }
         printf("\nMission Complete\n");
-    }else if(mllen && mllen <= curline) {
+    } else if(mllen && mllen <= curline) {
         printf("The mail addresses all sended or maillist file is invalid.\n");
     }
     if (fp) fclose(fp);
@@ -158,7 +158,8 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-void usage(int type) {
+void usage(int type)
+{
     t_option *tmp = (t_option *)NULL;
     tmp = get_opt("_");
     printf("\nUsage: %s [-r] [-h] [-f <from mail>] [-t <mail addr>] [-m <maillist>] [-b <mail file>] [-s <mail subject>] [-l <logfile>]\n\n", tmp->value);
@@ -198,7 +199,7 @@ char * subencode(const char *src, char *dest, unsigned int len)
     base64_encode(src, b, len);
     if (encode[i]) {
         sprintf(dest, "=?%s?B?%s?=", &encode[i], b);
-    }else {
+    } else {
         sprintf(dest, "=?%s?B?%s?=", encode, b);
     }
     return dest;
