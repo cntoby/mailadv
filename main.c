@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     unsigned int curline = 0, flen = 0, mllen = 0;
     int pause = 10, number = 0, itmp = 0;
     FILE *fp, *lfp;
-    char hdrs[] = "From: %s\r\nReply-To: %s\r\nX-Mailer: tobycn.org mailler 0.9\r\nMIME-Version: 1.0\r\nContent-Type: text/html; charset=UTF-8\r\nPrecedence: builk\r\nContent-Transfer-Encoding: base64\r\n";
+    char hdrs[] = "From: %s\r\nReply-To: %s\r\nX-Mailer: tobycn.org mailler 0.9\r\nMIME-Version: 1.0\r\nContent-Type: text/html; charset=UTF-8\r\nPrecedence: bulk\r\nContent-Transfer-Encoding: base64\r\n";
     char hdr[256];
     t_option arglist[] = {
         {'f', "from",     "A.D.S <ads@ads.snowpear.com>", TOPT_HAS_VAL},
