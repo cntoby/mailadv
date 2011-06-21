@@ -35,7 +35,7 @@
 #define TOPT_SET(toption)       ((toption->isset) = (toption->isset)|1) /* set toption */
 
 #define _T_MAX_NLEN 20
-#define _T_MAX_VLEN 80
+#define _T_MAX_VLEN 120
 #define TOPT_NO_VAL 0
 #define TOPT_HAS_VAL 2
 
